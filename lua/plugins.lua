@@ -31,5 +31,9 @@ return {
     -- colorsheme
     {"AlexvZyl/nordic.nvim",lazy=true},
     {"rafamadriz/neon",lazy=true},
-    {"freddiehaddad/feline.nvim",lazy=true}
+    {"rmehri01/onenord.nvim",lazy=true},
+    {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+    }
 }

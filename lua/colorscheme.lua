@@ -1,57 +1,53 @@
-vim.cmd([[colorscheme neon]])
+vim.cmd([[colorscheme onenord]])
 vim.o.background = "dark"
 
--- nordic
---[[
-local colorscheme = 'nordic'
-local is_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-if not is_ok then
-    vim.notify('colorscheme ' .. colorscheme .. ' not found!')
-    return
-end
-require 'nordic' .setup {
-    -- This callback can be used to override the colors used in the palette.
-    on_palette = function(palette) return palette end,
-    -- Enable bold keywords.
-    bold_keywords = false,
-    -- Enable italic comments.
-    italic_comments = true,
-    -- Enable general editor background transparency.
-    transparent_bg = false,
-    -- Enable brighter float border.
-    bright_border = false,
-    -- Reduce the overall amount of blue in the theme (diverges from base Nord).
-    reduced_blue = true,
-    -- Swap the dark background with the normal one.
-    swap_backgrounds = false,
-    -- Override the styling of any highlight group.
-    override = {},
-    -- Cursorline options.  Also includes visual/selection.
-    cursorline = {
-        -- Bold font in cursorline.
-        bold = false,
-        -- Bold cursorline number.
-        bold_number = true,
-        -- Avialable styles: 'dark', 'light'.
-        theme = 'dark',
-        -- Blending the cursorline bg with the buffer bg.
-        blend = 0.7,
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'nord',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
     },
-    noice = {
-        -- Available styles: `classic`, `flat`.
-        style = 'flat',
-    },
-    telescope = {
-        -- Available styles: `classic`, `flat`.
-        style = 'flat',
-    },
-    leap = {
-        -- Dims the backdrop when using leap.
-        dim_backdrop = false,
-    },
-    ts_context = {
-        -- Enables dark background for treesitter-context window
-        dark_background = true,
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = true,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
     }
+  },
+
+
+
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {
+        {
+            'filename',
+            file_status = true,     
+            newfile_status = true, 
+            path = 3, -- 2: Absolute path, 3: Absolute path, with tilde as the home directory
+            shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+                               -- for other components. (terrible name, any suggestions?)
+            symbols = {
+            modified = '[+]',      
+            readonly = '[-]',     
+            unnamed = '[No Name]',
+            newfile = '[New]',
+            }
+        },
+    },
+    lualine_x = {'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {'quickfix','lazy'}
 }
---]]
+
