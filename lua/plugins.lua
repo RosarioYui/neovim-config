@@ -18,7 +18,7 @@ return {
     }, config = function()
         require("plugin_configs.cmp")
     end},
-    {"github/copilot.vim"},
+    {"github/copilot.vim",lazy=tru},
     {
     'stevearc/aerial.nvim',
     opts = {},
@@ -26,7 +26,7 @@ return {
     dependencies = {
      "nvim-treesitter/nvim-treesitter",
      "nvim-tree/nvim-web-devicons"
-    },
+    }, lazy=true
     },
     -- rust
     {"simrat39/rust-tools.nvim", dependencies = {

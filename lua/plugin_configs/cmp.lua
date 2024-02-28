@@ -28,7 +28,13 @@ cmp.setup{
         {name = 'tags'},
         {name = 'buffer'},
         {name = 'path'},
-    })
+    }),
+    formatting = {
+        format = function(entry, vim_item)
+            vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
+            return vim_item
+        end
+    }
 }
 
 cmp.setup.cmdline({ '/', '?' }, {
