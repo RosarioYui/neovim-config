@@ -55,10 +55,11 @@ local bufferline = require('bufferline')
 --bufferline
 bufferline.setup{
     options = {
+        tab_size = 12,
         mode = "tabs",
         style_preset = bufferline.style_preset.no_italic,
         indicator = {
-                icon = '▎', -- this should be omitted if indicator style is not 'icon'
+                icon = '', -- this should be omitted if indicator style is not 'icon'
                 style = 'icon'
         }
     }

@@ -50,6 +50,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
 end
 
 
@@ -85,18 +86,12 @@ local opts = {
          checkOnSave = {
           command = "clippy",
          },
-        },
-    },
-  },
-}
-
-require("rust-tools").setup(opts)
-
-require'lspconfig'.clangd.setup{
-    cmd = { "clangd" },
-    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-    single_file_support = true,
-    root_dir =  lspconfig.util.root_pattern(
+      },
+      ["clangd"] = {
+          cmd = { "clangd" },
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+          single_file_support = true,
+          root_dir =  lspconfig.util.root_pattern(
           '.clangd',
           '.clang-tidy',
           '.clang-format',
@@ -104,5 +99,22 @@ require'lspconfig'.clangd.setup{
           'compile_flags.txt',
           'configure.ac',
           '.git'
-    )
+          ) 
+      }
+    },
+  },
 }
+
+require("rust-tools").setup(opts)
+require('lspconfig').clangd.setup(opts)
+
+require("aerial").setup({
+  -- optionally use on_attach to set keymaps when aerial has attached to a buffer
+  on_attach = function(bufnr)
+    -- Jump forwards/backwards with '{' and '}'
+    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+  end,
+})
+-- You probably also want to set a keymap to toggle aerial
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")

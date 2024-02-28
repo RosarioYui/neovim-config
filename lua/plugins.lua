@@ -19,7 +19,15 @@ return {
         require("plugin_configs.cmp")
     end},
     {"github/copilot.vim"},
-
+    {
+    'stevearc/aerial.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+     "nvim-treesitter/nvim-treesitter",
+     "nvim-tree/nvim-web-devicons"
+    },
+    },
     -- rust
     {"simrat39/rust-tools.nvim", dependencies = {
         {"neovim/nvim-lspconfig", lazy=true}    
@@ -33,8 +41,7 @@ return {
     {"rafamadriz/neon",lazy=true},
     {"rmehri01/onenord.nvim",lazy=true},
     {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' }
+    'nvim-lualine/lualine.nvim',dependencies = { 'nvim-tree/nvim-web-devicons'},lazy=true
     },
     {'akinsho/bufferline.nvim',lazy=true} 
 }
