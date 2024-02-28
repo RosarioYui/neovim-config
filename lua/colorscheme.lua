@@ -51,3 +51,15 @@ require('lualine').setup {
   extensions = {'quickfix','lazy'}
 }
 
+local bufferline = require('bufferline')
+--bufferline
+bufferline.setup{
+    options = {
+        mode = "tabs",
+        style_preset = bufferline.style_preset.no_italic,
+        indicator = {
+                icon = '▎', -- this should be omitted if indicator style is not 'icon'
+                style = 'icon'
+        }
+    }
+}
