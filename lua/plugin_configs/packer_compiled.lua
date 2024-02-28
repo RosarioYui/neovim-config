@@ -155,7 +155,7 @@ _G.packer_plugins = {
     url = "https://github.com/AlexvZyl/nordic.nvim"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-vsnip", "cmp-buffer", "cmp-cmdline", "cmp-nvim-lsp", "cmp-path" },
+    after = { "cmp-cmdline", "cmp-nvim-lsp", "cmp-path", "cmp-vsnip", "cmp-buffer" },
     config = { "require('config.nvim-cmp')" },
     loaded = true,
     only_config = true,
@@ -188,9 +188,9 @@ time([[Config for nvim-cmp]], false)
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd cmp-cmdline ]]
 vim.cmd [[ packadd cmp-vsnip ]]
-vim.cmd [[ packadd cmp-path ]]
 vim.cmd [[ packadd cmp-nvim-lsp ]]
 vim.cmd [[ packadd cmp-buffer ]]
+vim.cmd [[ packadd cmp-path ]]
 time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false

@@ -1,4 +1,8 @@
--- define your colorscheme here
+vim.cmd([[colorscheme neon]])
+vim.o.background = "dark"
+
+-- nordic
+--[[
 local colorscheme = 'nordic'
 local is_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not is_ok then
@@ -50,4 +54,4 @@ require 'nordic' .setup {
         dark_background = true,
     }
 }
-
+--]]

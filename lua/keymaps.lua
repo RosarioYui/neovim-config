@@ -7,7 +7,6 @@ local opts = {
 -----------------
 -- Normal mode --
 -----------------
-
 -- Hint: see `:h vim.map.set()`
 -- Better window navigation
 vim.keymap.set('n', '<C-h>', '<C-w>h', opts)

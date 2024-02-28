@@ -9,7 +9,7 @@ require('mason').setup({
 })
 require('mason-lspconfig').setup({
     -- A list of servers to automatically install if they're not already installed
-    ensure_installed = { 'pylsp', 'clangd', 'lua_ls', 'rust_analyzer' },
+    ensure_installed = { 'pylsp', 'clangd', 'lua_ls'}
 })
 
 -- Set different settings for different languages' LSP
@@ -52,9 +52,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
-lspconfig.pylsp.setup({
-    on_attach = on_attach,
-})
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
@@ -95,3 +92,17 @@ local opts = {
 
 require("rust-tools").setup(opts)
 
+require'lspconfig'.clangd.setup{
+    cmd = { "clangd" },
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+    single_file_support = true,
+    root_dir =  lspconfig.util.root_pattern(
+          '.clangd',
+          '.clang-tidy',
+          '.clang-format',
+          'compile_commands.json',
+          'compile_flags.txt',
+          'configure.ac',
+          '.git'
+    )
+}
