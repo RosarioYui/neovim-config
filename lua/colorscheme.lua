@@ -51,6 +51,7 @@ require('lualine').setup {
   extensions = {'quickfix','lazy'}
 }
 
+--[[
 local bufferline = require('bufferline')
 --bufferline
 bufferline.setup{
@@ -64,3 +65,4 @@ bufferline.setup{
         }
     }
 }
+]]--

@@ -11,21 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-opts = {
-    performance = {
-        cache = {
-        enabled = true,
-        },
-        reset_packpath = true, -- reset the package path to improve startup time
-        rtp = {
-            reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
-            ---@type string[]
-            paths = {}, -- add any custom paths here that you want to includes in the rtp
-            ---@type string[] list any plugins you want to disable here
-            disabled_plugins = {
-            },
-        },
-    }
-}
 
-require("lazy").setup("plugins", opts)
+
+require("lazy").setup("plugins")

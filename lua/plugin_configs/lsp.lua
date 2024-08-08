@@ -59,7 +59,7 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
-local opts = {
+local lsp_opts = {
   tools = {
     runnables = {
       use_telescope = true,
@@ -81,12 +81,7 @@ local opts = {
     settings = {
       -- to enable rust-analyzer settings visit:
       -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-      ["rust-analyzer"] = {
-        -- enable clippy on save
-         checkOnSave = {
-          command = "clippy",
-         },
-      },
+
       ["clangd"] = {
           cmd = { "clangd" },
           filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
@@ -100,13 +95,12 @@ local opts = {
           'configure.ac',
           '.git'
           ) 
-      }
+      }, 
     },
-  },
+  }
 }
 
-require("rust-tools").setup(opts)
-require('lspconfig').clangd.setup(opts)
+require('lspconfig').clangd.setup(lsp_opts)
 
 require("aerial").setup({
   -- optionally use on_attach to set keymaps when aerial has attached to a buffer
@@ -118,3 +112,10 @@ require("aerial").setup({
 })
 -- You probably also want to set a keymap to toggle aerial
 vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+
+require('lspconfig').verible.setup({
+        cmd = { 'verible-verilog-ls' },
+        root_dir = require('lspconfig').util.root_pattern({'.git', 'verilator.f'}),
+
+        filetypes = { "verilog", "systemverilog"},
+})

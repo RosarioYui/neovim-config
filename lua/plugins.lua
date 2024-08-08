@@ -1,24 +1,22 @@
 return {
     {
-        "nvim-tree/nvim-web-devicons", 
-        lazy=true
+        "nvim-tree/nvim-web-devicons",
     },
     {
         "neovim/nvim-lspconfig", 
-        lazy=true, 
         dependencies = {
-            {"williamboman/mason.nvim", lazy=true},
-            {"williamboman/mason-lspconfig.nvim", lazy=true}
+            {"williamboman/mason.nvim", lazy = false},
+            {"williamboman/mason-lspconfig.nvim", lazy = false}
         }, 
         config = function()
             require("plugin_configs.lsp")
-        end
+        end,
+        lazy = false
     },
     -- auto complete
-    -- event = {"BufReadPre", "CmdlineEnter", 
     {
         "hrsh7th/nvim-cmp", 
-        event = "InsertEnter", 
+        event = {"BufReadPre", "CmdlineEnter"}, 
         dependencies = {
             {"hrsh7th/cmp-nvim-lsp"},
             {"hrsh7th/cmp-buffer"},
@@ -26,18 +24,20 @@ return {
             {"hrsh7th/cmp-cmdline"},
             {"quangnguyen30192/cmp-nvim-tags"},
             {"saadparwaiz1/cmp_luasnip"},
-        },
+        }, config = function()
+            require("plugin_configs.cmp")
+        end,
+        lazy = false
     },
     {
-        "github/copilot.vim",
-        lazy=true
+        "github/copilot.vim"
     },
     {
         'stevearc/aerial.nvim',
         dependencies = {
         "nvim-treesitter/nvim-treesitter",
         "nvim-tree/nvim-web-devicons"
-        }, lazy=true
+        }, lazy=false
     },
 
     -- rust
@@ -53,7 +53,7 @@ return {
         "p00f/clangd_extensions.nvim", 
         dependencies = {
         {"neovim/nvim-lspconfig", lazy=true}    
-        }, lazy=true
+        }, lazy=false
     },
 
     -- colorsheme
@@ -74,5 +74,13 @@ return {
     {
         'akinsho/bufferline.nvim',
         lazy=true
-    } 
+    }, 
+    {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate",
+        config = function()
+            require("plugin_configs.treesitter")
+        end
+    },
+    {
+        "rafamadriz/neon"
+    }
 }
