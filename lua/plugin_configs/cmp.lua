@@ -39,7 +39,7 @@ cmp.setup{
             -- Hint: if the completion menu is visible select next one
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif copilot_keys ~= '' and type(copilot_keys) == 'string' then
+            elseif copilot_keys ~= '' and type(copilot_keys) == 'string' and string.byte(copilot_keys:sub(1,1))~=9 then
                 vim.api.nvim_feedkeys(copilot_keys, 'i', true)
 --            elseif has_words_before() then
 --                cmp.complete()
