@@ -24,7 +24,11 @@ return {
             {"hrsh7th/cmp-cmdline"},
             {"quangnguyen30192/cmp-nvim-tags"},
             {"saadparwaiz1/cmp_luasnip"},
-        }, config = function()
+            {
+            	"L3MON4D3/LuaSnip",
+	            build = "make install_jsregexp"
+            }
+            }, config = function()
             require("plugin_configs.cmp")
         end,
         lazy = false

@@ -17,7 +17,7 @@ cmp.setup{
     preselect = cmp.PreselectMode.None,
     snippet = {
         expand = function(args)
-            --luasnip.lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     mapping = cmp.mapping.preset.insert({
@@ -25,7 +25,8 @@ cmp.setup{
         ['<C-k>'] = cmp.mapping.select_prev_item(),
         ['<Up>'] = cmp.mapping.select_prev_item(),
         ['<Down>'] = cmp.mapping.select_next_item(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true, behavior=cmp.ConfirmBehavior.Insert }),
+        ['<CR>'] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Insert}),
+        ['<C-CR>'] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Insert}),
         -- Use <C-b/f> to scroll the docs
         ['<C-b>'] = cmp.mapping.scroll_docs( -4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -38,8 +39,8 @@ cmp.setup{
             -- Hint: if the completion menu is visible select next one
             if cmp.visible() then
                 cmp.select_next_item()
---            elseif copilot_keys ~= '' and type(copilot_keys) == 'string' then
---                vim.api.nvim_feedkeys(copilot_keys, 'i', true)
+            elseif copilot_keys ~= '' and type(copilot_keys) == 'string' then
+                vim.api.nvim_feedkeys(copilot_keys, 'i', true)
 --            elseif has_words_before() then
 --                cmp.complete()
             else
@@ -57,17 +58,20 @@ cmp.setup{
     sources = cmp.config.sources({
         {name = 'nvim_lsp'},
         {name = 'tags'},
-        {name = 'buffer'},
         {name = 'path'},
-    }),
+        { name = 'luasnip'}
+    },
+        {{name = 'buffer'}}
+    ),
     formatting = {
         format = function(entry, vim_item)
-            vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
+            vim_item.abbr = string.sub(vim_item.abbr, 1, 60)
             vim_item.menu = ({
               nvim_lsp = '[Lsp]',
-              luasnip = '[Luasnip]',
-              buffer = '[File]',
-              path = '[Path]',
+              tags = '[T]',
+              buffer = '[F]',
+              path = '[P]',
+              snippet = '[S]',
           })[entry.source.name]
             return vim_item
         end
@@ -83,8 +87,8 @@ cmp.setup.cmdline({ '/', '?' }, {
 
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        {name = 'path'},
-        {name = 'cmdline'}
-    })
+    sources = cmp.config.sources(
+    {{ name = 'path' }}, 
+    {{ name = 'cmdline' }}
+    )
 })
