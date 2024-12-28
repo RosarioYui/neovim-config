@@ -1,6 +1,6 @@
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "verilog", "cpp"},
+  ensure_installed = { "c", "python", "vim", "lua", "vimdoc", "verilog", "cpp", "markdown"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -8,6 +8,7 @@ require'nvim-treesitter.configs'.setup {
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
   auto_install = true,
+  debug = true,
 
   -- List of parsers to ignore installing (or "all")
   ignore_install = { "javascript" },
@@ -41,3 +42,6 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = {"verilog"},
   },
 }
+
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

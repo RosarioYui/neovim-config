@@ -82,7 +82,7 @@ return {
     {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate",
         config = function()
             require("plugin_configs.treesitter")
-        end
+        end,
     },
     {"rafamadriz/neon"},
     {"norcalli/nvim-colorizer.lua",

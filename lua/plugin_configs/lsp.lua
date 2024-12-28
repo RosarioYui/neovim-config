@@ -89,3 +89,9 @@ require('lspconfig').verible.setup({
 
         filetypes = { "verilog", "systemverilog"},
 })
+
+require('lspconfig').pylsp.setup{
+    cmd = { "pylsp" },
+    filetypes = { "python" },
+    single_file_support = true,
+}
