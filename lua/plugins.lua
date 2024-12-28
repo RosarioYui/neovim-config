@@ -84,7 +84,10 @@ return {
             require("plugin_configs.treesitter")
         end
     },
-    {
-        "rafamadriz/neon"
+    {"rafamadriz/neon"},
+    {"norcalli/nvim-colorizer.lua",
+        config = function()
+            require("plugin_configs.colorizer")
+        end
     }
 }
