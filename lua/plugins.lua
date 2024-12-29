@@ -3,11 +3,19 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     {
+        "williamboman/mason.nvim",
+        requires = { "neovim/nvim-lspconfig" },
+        config = function()
+            require("mason").setup()
+        end,
+        lazy = false
+    },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        requires = { "williamboman/mason.nvim" },
+    },
+    {
         "neovim/nvim-lspconfig", 
-        dependencies = {
-            {"williamboman/mason.nvim", lazy = false},
-            {"williamboman/mason-lspconfig.nvim", lazy = false}
-        }, 
         config = function()
             require("plugin_configs.lsp")
         end,
@@ -48,15 +56,15 @@ return {
     {
         "simrat39/rust-tools.nvim", 
         dependencies = {
-        {"neovim/nvim-lspconfig", lazy=true}    
-        }, lazy=true
+        {"neovim/nvim-lspconfig", lazy=false}    
+        }, lazy=false
     },
 
     -- clangd
     {
         "p00f/clangd_extensions.nvim", 
         dependencies = {
-        {"neovim/nvim-lspconfig", lazy=true}    
+        {"neovim/nvim-lspconfig", lazy=false}    
         }, lazy=false
     },
 

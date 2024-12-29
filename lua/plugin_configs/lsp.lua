@@ -12,24 +12,14 @@ require('mason-lspconfig').setup({
     ensure_installed = { 'pylsp', 'clangd', 'lua_ls'}
 })
 
--- Set different settings for different languages' LSP
--- LSP list: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
--- How to use setup({}): https://github.com/neovim/nvim-lspconfig/wiki/Understanding-setup-%7B%7D
---     - the settings table is sent to the LSP
---     - on_attach: a lua callback function to run after LSP atteches to a given buffer
-local lspconfig = require('lspconfig')
-
--- Customized on_attach function
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local custom_attach = function(client, bufnr)
+    local ft = vim.bo.filetype
+    if ft == "" or ft == nil then
+        client.stop()
+    end
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -49,10 +39,13 @@ local custom_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-end
+    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, bufopts)
 
-local clangd_opts = {
-}
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+end
 
 require('lspconfig').clangd.setup({
     on_attach = custom_attach,
@@ -60,7 +53,7 @@ require('lspconfig').clangd.setup({
           cmd = { "clangd", "--offset-encoding=utf-16"},
           filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
           single_file_support = true,
-          root_dir =  lspconfig.util.root_pattern(
+          root_dir =  require('lspconfig').util.root_pattern(
           '.clangd',
           '.clang-tidy',
           '.clang-format',
@@ -84,14 +77,42 @@ require("aerial").setup({
 vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 
 require('lspconfig').verible.setup({
+    on_attach = custom_attach,
         cmd = { 'verible-verilog-ls' },
         root_dir = require('lspconfig').util.root_pattern({'.git', 'verilator.f'}),
-
         filetypes = { "verilog", "systemverilog"},
 })
 
 require('lspconfig').pylsp.setup{
+    on_attach = custom_attach,
     cmd = { "pylsp" },
     filetypes = { "python" },
     single_file_support = true,
 }
+
+require('lspconfig').rust_analyzer.setup({
+    on_attach = custom_attach,
+    settings = {
+        ["rust-analyzer"] = {
+            diagnostics = {
+                enable = false;
+            }
+        }
+    },
+    cmd = { "rust-analyzer" },
+    filetypes = { "rust" },
+    single_file_support = true,
+    capabilities = {
+        experimental = {
+            serverStatusNotification = true
+        }
+    },
+    checkOnSave = {
+          command = "clippy",
+    },
+    inlayHints = {
+        closureCaptureHints = {
+            enable = true
+        }
+    }
+})
