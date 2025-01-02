@@ -33,3 +33,5 @@ vim.api.nvim_set_keymap('n', '<S-Tab>', '<<', { noremap = true, silent = true })
 vim.keymap.set('v', '<', '<gv', opts)
 vim.keymap.set('v', '>', '>gv', opts)
 
+vim.keymap.set('i', '<C-a>', '<Home>', opts)
+vim.keymap.set('i', '<C-e>', '<End>', opts)
