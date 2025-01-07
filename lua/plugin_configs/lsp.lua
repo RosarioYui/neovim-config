@@ -116,3 +116,7 @@ require('lspconfig').rust_analyzer.setup({
         }
     }
 })
+
+require'lspconfig'.marksman.setup{
+    on_attach = custom_attach
+}

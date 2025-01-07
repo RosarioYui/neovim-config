@@ -23,8 +23,12 @@ cmp.setup{
     mapping = cmp.mapping.preset.insert({
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-k>'] = cmp.mapping.select_prev_item(),
-        ['<Up>'] = cmp.mapping.select_prev_item(),
-        ['<Down>'] = cmp.mapping.select_next_item(),
+        ['<Up>'] = function(fallback)
+            fallback()
+        end,
+        ['<Down>'] = function(fallback)
+            fallback()
+        end,
         ['<CR>'] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Insert}),
         ['<C-CR>'] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Insert}),
         -- Use <C-b/f> to scroll the docs
@@ -59,10 +63,10 @@ cmp.setup{
         {name = 'nvim_lsp'},
         {name = 'tags'},
         {name = 'path'},
-        { name = 'luasnip'}
-    },
-        {{name = 'buffer'}}
-    ),
+        {name = 'luasnip'},
+        {name = 'render-markdown' },
+        {name = 'buffer'}
+    }),
     formatting = {
         format = function(entry, vim_item)
             vim_item.abbr = string.sub(vim_item.abbr, 1, 60)
