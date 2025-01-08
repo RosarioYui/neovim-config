@@ -21,14 +21,10 @@ cmp.setup{
         end,
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-j>'] = cmp.mapping.select_next_item(),
-        ['<C-k>'] = cmp.mapping.select_prev_item(),
-        ['<Up>'] = function(fallback)
-            fallback()
-        end,
-        ['<Down>'] = function(fallback)
-            fallback()
-        end,
+        ['<C-j>'] = function(fallback) fallback() end,
+        ['<C-k>'] = function(fallback) fallback() end,
+        ['<Up>'] =   function(fallback) fallback() end,
+        ['<Down>'] = function(fallback) fallback() end,
         ['<CR>'] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Insert}),
         ['<C-CR>'] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Insert}),
         -- Use <C-b/f> to scroll the docs

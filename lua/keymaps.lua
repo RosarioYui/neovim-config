@@ -35,3 +35,9 @@ vim.keymap.set('v', '>', '>gv', opts)
 
 vim.keymap.set('i', '<C-a>', '<Home>', opts)
 vim.keymap.set('i', '<C-e>', '<End>', opts)
+
+-- better cursor move
+vim.keymap.set('i', '<C-h>', '<Left>', opts)
+vim.keymap.set('i', '<C-j>', '<Down>', opts)
+vim.keymap.set('i', '<C-k>', '<Up>', opts)
+vim.keymap.set('i', '<C-l>', '<Right>', opts)
