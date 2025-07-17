@@ -110,6 +110,7 @@ require('lspconfig').rust_analyzer.setup({
     checkOnSave = {
           command = "clippy",
     },
+    standalone = true,
     inlayHints = {
         closureCaptureHints = {
             enable = true
@@ -117,6 +118,7 @@ require('lspconfig').rust_analyzer.setup({
     }
 })
 
-require'lspconfig'.marksman.setup{
-    on_attach = custom_attach
-}
+
+--require'lspconfig'.marksman.setup{
+--    on_attach = custom_attach
+--}

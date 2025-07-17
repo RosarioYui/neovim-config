@@ -36,8 +36,15 @@ vim.keymap.set('v', '>', '>gv', opts)
 vim.keymap.set('i', '<C-a>', '<Home>', opts)
 vim.keymap.set('i', '<C-e>', '<End>', opts)
 
--- better cursor move
+-- better cursor move in insert mode
 vim.keymap.set('i', '<C-h>', '<Left>', opts)
 vim.keymap.set('i', '<C-j>', '<Down>', opts)
 vim.keymap.set('i', '<C-k>', '<Up>', opts)
 vim.keymap.set('i', '<C-l>', '<Right>', opts)
+vim.keymap.set('i', '<C-d>', '<Del>', opts)
+vim.keymap.set('i', '<C-0>', '<Esc>^i', opts)
+vim.keymap.set('i', '<C-o>', '<Esc>oi', opts)
+vim.keymap.set('i', '<C-O>', '<Esc>Oi', opts)
+
+vim.keymap.set('x', 'p', '"_dP', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-/>', function() require('Comment.api').toggle.linewise.current() end, { noremap = true, silent = true })

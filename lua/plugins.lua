@@ -42,7 +42,7 @@ return {
         lazy = false
     },
     {
-        "github/copilot.vim"
+        "github/copilot.vim",
     },
     {
         'stevearc/aerial.nvim',
@@ -101,5 +101,36 @@ return {
     {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    },
+    {
+    'numToStr/Comment.nvim',
+    },
+    {
+    'mfussenegger/nvim-dap'
+    },
+
+    -- lazy.nvim 示例
+    {
+      "nvimdev/lspsaga.nvim",
+      event = "LspAttach",
+      config = function()
+        require("lspsaga").setup({
+          diagnostic = {
+            max_width = 100,
+            show_code_action = true,
+            show_source = true,
+          },
+          hover = {
+            max_width = 100,
+          },
+          ui = {
+            border = "rounded",
+          },
+        })
+      end,
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-tree/nvim-web-devicons",
+      }
     }
 }

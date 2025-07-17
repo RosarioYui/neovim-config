@@ -25,6 +25,7 @@ cmp.setup{
         ['<C-k>'] = function(fallback) fallback() end,
         ['<Up>'] =   function(fallback) fallback() end,
         ['<Down>'] = function(fallback) fallback() end,
+        ['<Enter>'] = function(fallback) fallback() end,
         ['<CR>'] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Insert}),
         ['<C-CR>'] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Insert}),
         -- Use <C-b/f> to scroll the docs
