@@ -27,3 +27,4 @@ vim.opt.smartcase = true -- but make it case sensitive if an uppercase is entere
 
 -- vim.lsp.set_log_level("debug")
 
+vim.opt.signcolumn = "yes"
