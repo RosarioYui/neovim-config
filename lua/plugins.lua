@@ -1,5 +1,15 @@
 return {
     {
+    "sphamba/smear-cursor.nvim",
+    opts = {},
+    },
+    {
+    "vhyrro/luarocks.nvim",
+    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+    config = true,
+    lazy = true
+    },
+    {
         "nvim-tree/nvim-web-devicons",
     },
     {
@@ -42,7 +52,7 @@ return {
         lazy = false
     },
     {
-        "github/copilot.vim",
+        "github/copilot.vim", enable=false
     },
     {
         'stevearc/aerial.nvim',
@@ -101,6 +111,7 @@ return {
     {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    lazy = true
     },
     {
     'numToStr/Comment.nvim',

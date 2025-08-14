@@ -43,7 +43,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
-vim.wo.foldmethod = 'expr'
+vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldlevel = 99
+vim.wo.foldlevel = 99
 --vim.opt.foldlevelstart = 1
