@@ -9,7 +9,7 @@ require('mason').setup({
 })
 require('mason-lspconfig').setup({
     -- A list of servers to automatically install if they're not already installed
-    ensure_installed = { 'pylsp', 'clangd', 'lua_ls'}
+    ensure_installed = {}
 })
 
 
@@ -47,24 +47,6 @@ local custom_attach = function(client, bufnr)
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 end
 
-require('lspconfig').clangd.setup({
-    on_attach = custom_attach,
-    ["clangd"] = {
-          cmd = { "clangd", "--offset-encoding=utf-16"},
-          filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-          single_file_support = true,
-          root_dir =  require('lspconfig').util.root_pattern(
-          '.clangd',
-          '.clang-tidy',
-          '.clang-format',
-          'compile_commands.json',
-          'compile_flags.txt',
-          'configure.ac',
-          '.git'
-          ) 
-    }
-})
-
 require("aerial").setup({
   -- optionally use on_attach to set keymaps when aerial has attached to a buffer
   on_attach = function(bufnr)
@@ -76,21 +58,39 @@ require("aerial").setup({
 -- You probably also want to set a keymap to toggle aerial
 vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 
-require('lspconfig').verible.setup({
-    on_attach = custom_attach,
-        cmd = { 'verible-verilog-ls' },
-        root_dir = require('lspconfig').util.root_pattern({'.git', 'verilator.f'}),
-        filetypes = { "verilog", "systemverilog"},
+vim.lsp.config("clangd", {
+  on_attach = custom_attach,
+  cmd = { "clangd", "--offset-encoding=utf-16"},
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+  single_file_support = true,
+  root_dir =  require('lspconfig').util.root_pattern(
+  '.clangd',
+  '.clang-tidy',
+  '.clang-format',
+  'compile_commands.json',
+  'compile_flags.txt',
+  'configure.ac',
+  '.git'
+  ) 
 })
 
-require('lspconfig').pylsp.setup{
+vim.lsp.config("verible", {
+    on_attach = custom_attach,
+    cmd = { 'verible-verilog-ls' },
+    root_dir = require('lspconfig').util.root_pattern({'.git', 'verilator.f'}),
+    filetypes = { "verilog", "systemverilog"}
+})
+
+--[[
+vim.lsp.config("pylsp", {
     on_attach = custom_attach,
     cmd = { "pylsp" },
     filetypes = { "python" },
     single_file_support = true,
-}
+})
+]]--
 
-require('lspconfig').rust_analyzer.setup({
+vim.lsp.config("rust_analyzer",{
     on_attach = custom_attach,
     settings = {
         ["rust-analyzer"] = {
