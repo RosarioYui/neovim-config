@@ -1,10 +1,34 @@
-vim.cmd([[colorscheme onenord]])
-vim.o.background = "dark"
+require('kanagawa').setup({
+    compile = false,             -- enable compiling the colorscheme
+    undercurl = true,            -- enable undercurls
+    commentStyle = { italic = true },
+    functionStyle = {},
+    keywordStyle = { italic = true},
+    statementStyle = { bold = true },
+    typeStyle = {},
+    transparent = false,         -- do not set background color
+    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+    colors = {                   -- add/modify theme and palette colors
+        palette = {},
+        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+    },
+    overrides = function(colors) -- add/modify highlights
+        return {}
+    end,
+    theme = "lotus",              -- Load "wave" theme
+    background = {               -- map the value of 'background' option to a theme
+        dark = "wave",           -- try "dragon" !
+        light = "lotus"
+    },
+})
+vim.cmd([[colorscheme cobalt]])
+--vim.o.background = "dark"
 
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'nord',
+    theme = 'cobalt',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
@@ -20,9 +44,6 @@ require('lualine').setup {
       winbar = 1000,
     }
   },
-
-
-
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},

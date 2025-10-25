@@ -38,7 +38,7 @@ local custom_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format({ async = true }) end, bufopts)
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
@@ -63,15 +63,7 @@ vim.lsp.config("clangd", {
   cmd = { "clangd", "--offset-encoding=utf-16"},
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
   single_file_support = true,
-  root_dir =  require('lspconfig').util.root_pattern(
-  '.clangd',
-  '.clang-tidy',
-  '.clang-format',
-  'compile_commands.json',
-  'compile_flags.txt',
-  'configure.ac',
-  '.git'
-  ) 
+  root_markers = { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" }
 })
 
 vim.lsp.config("verible", {
@@ -81,6 +73,12 @@ vim.lsp.config("verible", {
     filetypes = { "verilog", "systemverilog"}
 })
 
+vim.lsp.config("lua_ls", {
+    on_attach = custom_attach,
+    cmd = { "lua-language-server" },
+    filetypes = { "lua" },
+    root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" }
+})
 --[[
 vim.lsp.config("pylsp", {
     on_attach = custom_attach,
