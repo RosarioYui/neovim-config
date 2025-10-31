@@ -48,3 +48,9 @@ vim.keymap.set('i', '<C-O>', '<Esc>Oi', opts)
 
 vim.keymap.set('x', 'p', '"_dP', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-/>', function() require('Comment.api').toggle.linewise.current() end, { noremap = true, silent = true })
+
+-- Switch to next tab
+vim.keymap.set('n', '<C-]>', ':tabnext<CR>', { desc = 'Next Tab' })
+
+-- Switch to previous tab
+vim.keymap.set('n', '<C-[>', ':tabprevious<CR>', { desc = 'Previous Tab' })

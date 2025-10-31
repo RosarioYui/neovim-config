@@ -1,7 +1,7 @@
-vim.keymap.set("n", "<leader>e", "<Cmd>Neotree<CR>")
+vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>")
 require('neo-tree').setup({
   close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-  popup_border_style = "NC", -- or "" to use 'winborder' on Neovim v0.11+
+  popup_border_style = "", -- or "" to use 'winborder' on Neovim v0.11+
   enable_git_status = true,
   enable_diagnostics = true,
   open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
@@ -224,12 +224,12 @@ require('neo-tree').setup({
       },
     },
     follow_current_file = {
-      enabled = false, -- This will find and focus the file in the active buffer every time
+      enabled = true, -- This will find and focus the file in the active buffer every time
       --               -- the current file is changed while the tree is open.
-      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
     },
     group_empty_dirs = false, -- when true, empty folders will be grouped together
-    hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
+    hijack_netrw_behavior = "open_current", -- netrw disabled, opening a directory opens neo-tree
     -- in whatever position is specified in window.position
     -- "open_current",  -- netrw disabled, opening a directory opens within the
     -- window like netrw would, regardless of window.position

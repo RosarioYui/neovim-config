@@ -99,10 +99,6 @@ return {
         priority = 1000,
     },
     {
-        'akinsho/bufferline.nvim',
-        lazy = true
-    },
-    {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function()
@@ -217,6 +213,43 @@ return {
         "kdheepak/lazygit.nvim",
         lazy = true,
         md = {
+            "LazyGit",
+            "LazyGitConfig",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
+        -- optional for floating window border decoration
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        -- setting the keybinding for LazyGit with 'keys' is recommended in
+        -- order to load the plugin when the command is run for the first time
+        keys = {
+            { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+        }
+    },
+    {
+        "EdenEast/nightfox.nvim",
+        lazy = true
+    }, -- lazy
+    {
+        "Tsuzat/NeoSolarized.nvim",
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other start plugins
+        transparent = false
+    },
+    {
+        "akinsho/bufferline.nvim",
+        config = function()
+            require("plugin_configs.bufferline")
+        end
+    },
+    { "onsails/lspkind.nvim" },
+    {
+        "kdheepak/lazygit.nvim",
+        lazy = true,
+        cmd = {
             "LazyGit",
             "LazyGitConfig",
             "LazyGitCurrentFile",
