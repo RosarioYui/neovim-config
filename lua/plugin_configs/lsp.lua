@@ -116,6 +116,12 @@ vim.lsp.config("rust_analyzer",{
     }
 })
 
+vim.lsp.config("zls", {
+    on_attach = custom_attach,
+    cmd = { "zls" },
+    filetypes = { "zig" },
+    root_markers = { ".git", "build.zig", "zig.mod" }
+})
 
 --require'lspconfig'.marksman.setup{
 --    on_attach = custom_attach

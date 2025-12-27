@@ -60,13 +60,13 @@ require("NeoSolarized").setup {
   },
   -- Add specific hightlight groups
   on_highlights = function(highlights, colors) 
-    -- highlights.Include.fg = colors.red -- Using `red` foreground for Includes
+    highlights.Include.fg = colors.red -- Using `red` foreground for Includes
   end, 
 }
 
 -- setup must be called before loading
--- vim.cmd("colorscheme NeoSolarized")
-vim.cmd("colorscheme cobalt")
+vim.cmd("colorscheme NeoSolarized")
+--vim.cmd("colorscheme cobalt")
 
 require('kanagawa').setup({
     compile = false,  -- enable compiling the colorscheme
@@ -97,7 +97,7 @@ require('kanagawa').setup({
 require('lualine').setup {
     options = {
         icons_enabled = true,
---        theme = 'nightfox',
+        --theme = 'NeoSolarized',
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
